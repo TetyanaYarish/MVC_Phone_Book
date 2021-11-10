@@ -1,0 +1,30 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MVC_Phone_Book", "MVC_Phone_Book\MVC_Phone_Book.csproj", "{065A17C6-F03A-406A-A7B3-4515B21B57A8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{12BA4C7A-E594-4851-93C5-7645078756DA}"
+	ProjectSection(SolutionItems) = preProject
+		TextFile1.txt = TextFile1.txt
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{065A17C6-F03A-406A-A7B3-4515B21B57A8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{065A17C6-F03A-406A-A7B3-4515B21B57A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{065A17C6-F03A-406A-A7B3-4515B21B57A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{065A17C6-F03A-406A-A7B3-4515B21B57A8}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {856D4FFE-6A0B-4C7E-A7AF-E8DBF6AE18B3}
+	EndGlobalSection
+EndGlobal
