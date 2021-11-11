@@ -1,4 +1,4 @@
-﻿@model MVC_Phone_Book.Models.PersonClass
+﻿@model MVC_Phone_Book.Models.Person
 
 @{
     ViewData["Title"] = "Delete";
@@ -34,6 +34,12 @@
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Address)
+        </dd> 
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Email)
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.PhoneNumber)

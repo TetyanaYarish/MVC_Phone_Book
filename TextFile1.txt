@@ -1,1 +1,5 @@
 https://docs.microsoft.com/en-us/aspnet/core/tutorials/first-mvc-app/working-with-sql?view=aspnetcore-6.0&tabs=visual-studio
+
+Add-Migration InitialCreate
+Update-Database
+

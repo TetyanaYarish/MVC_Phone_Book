@@ -1,48 +1,153 @@
-﻿//using Microsoft.AspNetCore.Mvc;
-//using MVC_Phone_Book.Data;
-//using System;
-//using System.Collections.Generic;
-//using System.Linq;
-//using System.Text.Encodings.Web;
-//using System.Threading.Tasks;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
+using MVC_Phone_Book.Data;
+using MVC_Phone_Book.Models;
 
-//namespace MVC_Phone_Book.Controllers
-//{
-//    public class PersonController : Controller
-//    {
-//        private readonly PersonController _context;
+namespace MVC_Phone_Book.Controllers
+{
+    public class PersonController : Controller
+    {
+        private readonly MVC_Phone_BookContext _context;
 
-//        public PersonController(MVC_Phone_BookContext context)
-//        {
-//            _context = context;
-//        }
-//        public IActionResult Index()
-//        {
-//            return View();
-//        }
+        public PersonController(MVC_Phone_BookContext context)
+        {
+            _context = context;
+        }
 
-//        // 
-//        // GET: /Person/Welcome/ 
+        // GET: PersonClasses
+        public async Task<IActionResult> Index()
+        {
+            return View(await _context.Person.ToListAsync());
+        }
 
-//        /* public string Welcome(string name, int numTimes = 1)
-//         {
-//             // https://localhost:{PORT}/HelloWorld/Welcome?name=Rick&numtimes=4
-//             // /Welcome/3?name=Rick
-//             //The URL segment Parameters isn't used.
-//             // The name and numTimes parameters are passed in the query string.
-//             //The ? (question mark) in the above URL is a separator,
-//             //and the query string follows. The & character separates field-value pairs.
+        // GET: PersonClasses/Details/5
+        public async Task<IActionResult> Details(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
 
-//             return HtmlEncoder.Default.Encode($"Hello {name}, NumTimes is: {numTimes}"); }*/
+            var personClass = await _context.Person
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (personClass == null)
+            {
+                return NotFound();
+            }
 
-//        public IActionResult Welcome(string name, int numTimes = 1)
-//        {
-//            ViewData["Message"] = "Hello " + name;
-//            ViewData["NumTimes"] = numTimes;
+            return View(personClass);
+        }
 
-//            return View();
-//        }
+        // GET: PersonClasses/Create
+        public IActionResult Create()
+        {
+            return View();
+        }
 
+        // POST: PersonClasses/Create
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create([Bind("Id,FirstName,SecondName,DateOfBirth,Address,PhoneNumber")] Person personClass)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Add(personClass);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            return View(personClass);
+        }
 
-//    }
-//}
+        // GET: PersonClasses/Edit/5
+        public async Task<IActionResult> Edit(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var personClass = await _context.Person.FindAsync(id);
+            if (personClass == null)
+            {
+                return NotFound();
+            }
+            return View(personClass);
+        }
+
+        // POST: PersonClasses/Edit/5
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(int id, [Bind("Id,FirstName,SecondName,DateOfBirth,Address,PhoneNumber")] Person personClass)
+        {
+            if (id != personClass.Id)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _context.Update(personClass);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!PersonClassExists(personClass.Id))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return RedirectToAction(nameof(Index));
+            }
+            return View(personClass);
+        }
+
+        // GET: PersonClasses/Delete/5
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var personClass = await _context.Person
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (personClass == null)
+            {
+                return NotFound();
+            }
+
+            return View(personClass);
+        }
+
+        // POST: PersonClasses/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            var personClass = await _context.Person.FindAsync(id);
+            _context.Person.Remove(personClass);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
+
+        private bool PersonClassExists(int id)
+        {
+            return _context.Person.Any(e => e.Id == id);
+        }
+    }
+}

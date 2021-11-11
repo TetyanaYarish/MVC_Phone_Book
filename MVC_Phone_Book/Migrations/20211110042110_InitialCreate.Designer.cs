@@ -24,7 +24,7 @@ namespace MVC_Phone_Book.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("MVC_Phone_Book.Models.PersonClass", b =>
+            modelBuilder.Entity("MVC_Phone_Book.Models.Person", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
