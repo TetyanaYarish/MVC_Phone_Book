@@ -25,7 +25,7 @@ namespace MVC_Phone_Book.Models
                         SecondName = "Brisban",
                         Address = "Her new home",
                         DateOfBirth = DateTime.Parse("2000-2-12"),
-                        PhoneNumber = 0123456789,
+                        PhoneNumber = "0123456789",
                         Email = "bob1@gmail.com"
                     },
                      new Person
@@ -34,7 +34,7 @@ namespace MVC_Phone_Book.Models
                          SecondName = "Tramp",
                          Address = "Her new home",
                          DateOfBirth = DateTime.Parse("2000-2-12"),
-                         PhoneNumber = 0123456789,
+                         PhoneNumber = "0123456789",
                          Email="bob2@gmail.com"
                      }
                     );

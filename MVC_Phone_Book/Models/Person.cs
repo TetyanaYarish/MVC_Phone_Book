@@ -40,8 +40,8 @@ namespace MVC_Phone_Book.Models
 
         public string Address { get; set; }
         [Display(Name = "Phone Number")]
-        [DataType(DataType.PhoneNumber)]
+        //[DataType(DataType.PhoneNumber)]
         [MaxLength(10)]
-        public int PhoneNumber { get; set; }
+        public string PhoneNumber { get; set; }
     }
 }
