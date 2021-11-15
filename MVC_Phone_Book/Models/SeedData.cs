@@ -26,7 +26,8 @@ namespace MVC_Phone_Book.Models
                         Address = "Her new home",
                         DateOfBirth = DateTime.Parse("2000-2-12"),
                         PhoneNumber = "0123456789",
-                     
+                        Age = 35,
+
                     },
                      new Person
                      {
@@ -35,7 +36,7 @@ namespace MVC_Phone_Book.Models
                          Address = "Her new home",
                          DateOfBirth = DateTime.Parse("2000-2-12"),
                          PhoneNumber = "0123456789",
-                    
+                         Age =35,                    
                      }
                     );
                 context.SaveChanges();

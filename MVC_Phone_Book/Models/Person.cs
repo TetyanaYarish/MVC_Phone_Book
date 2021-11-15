@@ -10,7 +10,7 @@ namespace MVC_Phone_Book.Models
     public class Person
     {
         public int Id { get; set; }
-
+        private int age;
         [Display(Name = "First Name")]
         public string FirstName { get; set; }
 
@@ -25,5 +25,15 @@ namespace MVC_Phone_Book.Models
         [Display(Name = "Phone Number")]
         [MaxLength(10)]
         public string PhoneNumber { get; set; }
+        public int Age
+        {
+            get
+            {
+                return DateTime.Now.Subtract(DateOfBirth).Days / 365;
+            }
+            set { age = value; }
+        }
+
+
     }
 }
