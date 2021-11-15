@@ -3,3 +3,26 @@ https://docs.microsoft.com/en-us/aspnet/core/tutorials/first-mvc-app/working-wit
 Add-Migration InitialCreate
 Update-Database
 
+    public class Person
+    {
+        public int Id { get; set; }
+
+        //  private string _firstName;
+        [Display(Name = "First Name")]
+        public string FirstName { get; set; }
+        //{
+        //    get
+        //    {
+        //        return _firstName;
+        //    }
+        //    set
+        //    {
+        //        if (value != "Bob")
+        //            throw new ArgumentException("Only Bobs are allowed here!");
+        //        _firstName = value;
+        //    }
+        //}
+        [Display(Name = "Email")]
+        // [EmailAddress]
+       [DataType(DataType.EmailAddress)]
+        public string Email { get; set; }
