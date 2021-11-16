@@ -10,7 +10,7 @@ namespace MVC_Phone_Book.Models
     public class Person
     {
         public int Id { get; set; }
-       
+        private int age;
         [Display(Name = "First Name")]
         public string FirstName { get; set; }
 

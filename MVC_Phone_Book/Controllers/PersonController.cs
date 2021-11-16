@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MVC_Phone_Book.Data;
 using MVC_Phone_Book.Models;
+using Newtonsoft.Json;
 
 namespace MVC_Phone_Book.Controllers
 {
@@ -27,14 +30,14 @@ namespace MVC_Phone_Book.Controllers
                          select p;
             if (!String.IsNullOrEmpty(searchString))
             {
-                people=people.Where(p=> p.FirstName.Contains(searchString));
+                people = people.Where(p => p.FirstName.Contains(searchString));
             }
             return View(await people.ToListAsync());
-           // return View(await _context.Person.ToListAsync());
+            // return View(await _context.Person.ToListAsync());
         }
 
         // GET: PersonClasses/Details/5
-                public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
             {
@@ -50,11 +53,11 @@ namespace MVC_Phone_Book.Controllers
 
             return View(personClass);
         }
-
-        // GET: PersonClasses/Create
-        public IActionResult Create()
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<Person>>> AverageAge()
         {
-            return View();
+            return await _context.Person.ToListAsync();
+
         }
 
         // POST: PersonClasses/Create
