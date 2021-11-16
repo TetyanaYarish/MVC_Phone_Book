@@ -7,6 +7,12 @@
 <h1>Phone book</h1>
 
 <p>
+    <form asp-controller="Person" asp-action="Index">
+        <p>
+            First Name: <input type="text" name="SearchString" />
+            <input type="submit" value="Find Person" />
+        </p>
+    </form>
     <a asp-action="Create">Create New</a>
 </p>
 <table class="table">
@@ -23,46 +29,67 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Address)
-            </th> 
-        
+            </th>
+
             <th>
                 @Html.DisplayNameFor(model => model.PhoneNumber)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Age)
             </th>
- 
+
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.FirstName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SecondName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DateOfBirth)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Address)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PhoneNumber)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Age)
-            </td>
- 
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FirstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SecondName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateOfBirth)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Address)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PhoneNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Age)
+                </td>
+
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
+<p>The average age of contacts in the list is:  @{
+
+        int varPerson=0;
+        int numberOfContacts =  Model.Count();
+        var average = 0;
+        ;
+
+         @foreach (var item in Model)
+        {
+            varPerson += item.Age;
+           
+
+        }
+        average = varPerson / numberOfContacts;
+         @Html.DisplayFor(modelItem =>average);
+
+    }
+    </p>
+
+

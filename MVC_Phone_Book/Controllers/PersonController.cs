@@ -21,9 +21,16 @@ namespace MVC_Phone_Book.Controllers
 
         // GET: PersonClasses
         // [HttpGet]
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string searchString)
         {
-            return View(await _context.Person.ToListAsync());
+            var people = from p in _context.Person
+                         select p;
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                people=people.Where(p=> p.FirstName.Contains(searchString));
+            }
+            return View(await people.ToListAsync());
+           // return View(await _context.Person.ToListAsync());
         }
 
         // GET: PersonClasses/Details/5
