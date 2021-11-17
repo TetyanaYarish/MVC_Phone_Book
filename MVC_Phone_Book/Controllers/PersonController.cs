@@ -54,10 +54,12 @@ namespace MVC_Phone_Book.Controllers
             return View(personClass);
         }
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Person>>> AverageAge()
+        public async Task<ActionResult<IEnumerable<Person>>> AverageAge(string firstName)
         {
+            var personClass = await _context.Person
+               .FirstOrDefaultAsync(m => m.FirstName == firstName);
             return await _context.Person.ToListAsync();
-
+            // return View(personClass);
         }
 
         // POST: PersonClasses/Create

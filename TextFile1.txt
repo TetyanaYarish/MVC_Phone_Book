@@ -26,3 +26,12 @@ Update-Database
         // [EmailAddress]
        [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
+
+
+Method AverageAge reterns json file
+ [HttpGet]
+        public async Task<ActionResult<IEnumerable<Person>>> AverageAge()
+        {
+            return await _context.Person.ToListAsync();
+
+        }
