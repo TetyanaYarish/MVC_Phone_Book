@@ -1,20 +1,8 @@
 ﻿@model IEnumerable<MVC_Phone_Book.Models.Person>
 
 @{
-    ViewData["Title"] = "Contact list";
+    ViewData["Title"] = "AverageAge";
 }
-
-<h1>Phone book</h1>
-
-<p>
-    <form asp-controller="Person" asp-action="Index">
-        <p>
-            First Name: <input type="text" name="SearchString" />
-            <input type="submit" value="Find Person" />
-        </p>
-    </form>
-    <a asp-action="Create">Create New</a>
-</p>
 <table class="table">
     <thead>
         <tr>
@@ -33,9 +21,6 @@
 
             <th>
                 @Html.DisplayNameFor(model => model.PhoneNumber)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Email)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Age)
@@ -62,7 +47,7 @@
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.PhoneNumber)
-                </td>
+                </td>    
                 <td>
                     @Html.DisplayFor(modelItem => item.Email)
                 </td>
@@ -79,24 +64,21 @@
         }
     </tbody>
 </table>
-<p>
-    Average age of contacts in the list is:  @{
+<p>Average age of contacts in the list is:  @{
 
-        int varPerson = 0;
-        int numberOfContacts = Model.Count();
+        int varPerson=0;
+        int numberOfContacts =  Model.Count();
         var average = 0;
         ;
 
-        @foreach (var item in Model)
+         @foreach (var item in Model)
         {
             varPerson += item.Age;
-
+           
 
         }
         average = varPerson / numberOfContacts;
-        @Html.DisplayFor(modelItem => average);
+         @Html.DisplayFor(modelItem =>average);
 
     }
-</p>
-
-
+    </p>

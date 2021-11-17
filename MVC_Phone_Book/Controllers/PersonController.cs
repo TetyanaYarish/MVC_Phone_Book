@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MVC_Phone_Book.Data;
 using MVC_Phone_Book.Models;
+using Newtonsoft.Json;
 
 namespace MVC_Phone_Book.Controllers
 {
@@ -19,13 +22,20 @@ namespace MVC_Phone_Book.Controllers
             _context = context;
         }
 
-        // GET: PersonClasses
-        public async Task<IActionResult> Index()
+        //GET: PersonClasses
+        //[HttpGet]
+        public async Task<IActionResult> Index(string searchString)
         {
-            return View(await _context.Person.ToListAsync());
+            var people = from p in _context.Person
+                         select p;
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                people = people.Where(p => p.FirstName.Contains(searchString));
+            }
+            return View(await people.ToListAsync());
         }
 
-        // GET: PersonClasses/Details/5
+        //GET: PersonClasses/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -42,19 +52,34 @@ namespace MVC_Phone_Book.Controllers
 
             return View(personClass);
         }
-
-        // GET: PersonClasses/Create
-        public IActionResult Create()
+        public async Task<IActionResult> AverageAge([FromQuery] string firstName)
         {
-            return View();
+
+            if (firstName == null)
+            {
+                return NotFound();
+            }
+
+            var personClass = from p in _context.Person select p;
+
+            if (!String.IsNullOrEmpty(firstName))
+            {
+                personClass = personClass.Where(p => p.FirstName.Contains(firstName));
+            }
+
+            return View(await personClass.ToListAsync());
         }
 
         // POST: PersonClasses/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        public IActionResult Create()
+        {
+            return View();
+        }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,FirstName,SecondName,DateOfBirth,Address,PhoneNumber")] Person personClass)
+        public async Task<IActionResult> Create([Bind("Id,FirstName,SecondName,DateOfBirth,Address,PhoneNumber,Email")] Person personClass)
         {
             if (ModelState.IsValid)
             {
@@ -86,7 +111,7 @@ namespace MVC_Phone_Book.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,FirstName,SecondName,DateOfBirth,Address,PhoneNumber")] Person personClass)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,FirstName,SecondName,DateOfBirth,Address,PhoneNumber,Email")] Person personClass)
         {
             if (id != personClass.Id)
             {

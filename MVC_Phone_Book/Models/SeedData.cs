@@ -14,19 +14,21 @@ namespace MVC_Phone_Book.Models
                                                                                                                                            //DbContextOptions -using Microsoft.EntityFrameworkCore;
 
             {
-                if(context.Person.Any()) //Any -using System.Linq; //If we have none contacts the seed initializer returns and no contact are added.
-                { 
+                if (context.Person.Any()) //Any -using System.Linq; //If we have none contacts the seed initializer returns and no contact are added.
+                {
                     return;
                 }
                 context.Person.AddRange(
                     new Person
                     {
                         FirstName = "Bob",
-                        SecondName = "Brisban",
+                        SecondName = "Brisbane",
                         Address = "Her new home",
                         DateOfBirth = DateTime.Parse("2000-2-12"),
                         PhoneNumber = "0123456789",
-                        Email = "bob1@gmail.com"
+                        Email = "bob1@gmail.com",
+                        Age = 35,
+
                     },
                      new Person
                      {
@@ -35,12 +37,13 @@ namespace MVC_Phone_Book.Models
                          Address = "Her new home",
                          DateOfBirth = DateTime.Parse("2000-2-12"),
                          PhoneNumber = "0123456789",
-                         Email="bob2@gmail.com"
+                         Email = "bob2@gmail.com",
+                         Age = 35,
                      }
-                    );
+                    ); ;
                 context.SaveChanges();
             }
 
-         }
+        }
     }
 }
