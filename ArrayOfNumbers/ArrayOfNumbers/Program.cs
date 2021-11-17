@@ -13,7 +13,7 @@ namespace ArrayOfNumbers
             Console.WriteLine("Please insert your numbers: ");
             for (int i = 0; i < size; i++)
             {
-                //  array[i] = Convert.ToInt32(Console.ReadLine());
+
                     array = Console.ReadLine().Split(new Char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries).Select(item => int.Parse(item)).ToArray();
             }
             int sum = 0;
