@@ -10,7 +10,10 @@ namespace MVC_Phone_Book.Models
     public class Person
     {
         public int Id { get; set; }
-        private int age;
+        public int age;
+        [RegularExpression(@"^[A-Z]+[a-zA-Z\s]*$")]
+        [Required]
+        [StringLength(60, MinimumLength = 2)]
         [Display(Name = "First Name")]
         public string FirstName { get; set; }
 
@@ -20,12 +23,16 @@ namespace MVC_Phone_Book.Models
         [Display(Name = "Date of birth")]
         [DataType(DataType.Date)]
         public DateTime DateOfBirth { get; set; }
-
+        [RegularExpression(@"^[A-Z]+[a-zA-Z0-9""'\s-]*$")]//Must only use letters.
+                                                          //The first letter is required to be uppercase.
+                                                          //White spaces are allowed while numbers, and special characters are not allowed.
         public string Address { get; set; }
         [Display(Name = "Phone Number")]
         [MaxLength(10)]
-        
+
         public string PhoneNumber { get; set; }
+        [EmailAddress]
+        public string Email { get; set; }
         public int Age
         {
             get

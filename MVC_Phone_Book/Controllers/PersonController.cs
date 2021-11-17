@@ -54,6 +54,7 @@ namespace MVC_Phone_Book.Controllers
         }
         public async Task<IActionResult> AverageAge([FromQuery] string firstName)
         {
+            
             if (firstName == null)
             {
                 return NotFound();
@@ -72,9 +73,13 @@ namespace MVC_Phone_Book.Controllers
         // POST: PersonClasses/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        public IActionResult Create()
+        {
+            return View();
+        }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,FirstName,SecondName,DateOfBirth,Address,PhoneNumber")] Person personClass)
+        public async Task<IActionResult> Create([Bind("Id,FirstName,SecondName,DateOfBirth,Address,PhoneNumber,Email")] Person personClass)
         {
             if (ModelState.IsValid)
             {
@@ -106,7 +111,7 @@ namespace MVC_Phone_Book.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,FirstName,SecondName,DateOfBirth,Address,PhoneNumber")] Person personClass)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,FirstName,SecondName,DateOfBirth,Address,PhoneNumber,Email")] Person personClass)
         {
             if (id != personClass.Id)
             {
