@@ -37,29 +37,37 @@ namespace MVC_Phone_Book.Controllers
         }
 
         // GET: PersonClasses/Details/5
-        public async Task<IActionResult> Details(int? id)
+        //public async Task<IActionResult> Details(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return NotFound();
+        //    }
+
+        //    var personClass = await _context.Person
+        //        .FirstOrDefaultAsync(m => m.Id == id);
+        //    if (personClass == null)
+        //    {
+        //        return NotFound();
+        //    }
+
+        //    return View(personClass);
+        //}
+        public async Task<IActionResult> AverageAge(string firstName)
         {
-            if (id == null)
+            if (firstName == null)
             {
                 return NotFound();
             }
 
             var personClass = await _context.Person
-                .FirstOrDefaultAsync(m => m.Id == id);
+                .FirstOrDefaultAsync(m => m.FirstName == firstName);
             if (personClass == null)
             {
                 return NotFound();
             }
 
             return View(personClass);
-        }
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<Person>>> AverageAge(string firstName)
-        {
-            var personClass = await _context.Person
-               .FirstOrDefaultAsync(m => m.FirstName == firstName);
-            return await _context.Person.ToListAsync();
-            // return View(personClass);
         }
 
         // POST: PersonClasses/Create
