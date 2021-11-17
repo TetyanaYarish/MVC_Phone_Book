@@ -22,8 +22,8 @@ namespace MVC_Phone_Book.Controllers
             _context = context;
         }
 
-        // GET: PersonClasses
-        // [HttpGet]
+        //GET: PersonClasses
+        //[HttpGet]
         public async Task<IActionResult> Index(string searchString)
         {
             var people = from p in _context.Person
@@ -33,41 +33,40 @@ namespace MVC_Phone_Book.Controllers
                 people = people.Where(p => p.FirstName.Contains(searchString));
             }
             return View(await people.ToListAsync());
-            // return View(await _context.Person.ToListAsync());
         }
 
-        // GET: PersonClasses/Details/5
-        //public async Task<IActionResult> Details(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    var personClass = await _context.Person
-        //        .FirstOrDefaultAsync(m => m.Id == id);
-        //    if (personClass == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    return View(personClass);
-        //}
-        public async Task<IActionResult> AverageAge(string firstName)
+        //GET: PersonClasses/Details/5
+        public async Task<IActionResult> Details(int? id)
         {
-            if (firstName == null)
+            if (id == null)
             {
                 return NotFound();
             }
 
             var personClass = await _context.Person
-                .FirstOrDefaultAsync(m => m.FirstName == firstName);
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (personClass == null)
             {
                 return NotFound();
             }
 
             return View(personClass);
+        }
+        public async Task<IActionResult> AverageAge([FromQuery] string firstName)
+        {
+            if (firstName == null)
+            {
+                return NotFound();
+            }
+
+            var personClass =from p in _context.Person select p;
+
+            if (!String.IsNullOrEmpty(firstName))
+            {
+                personClass=personClass.Where(p=>p.FirstName.Contains(firstName));
+            }
+
+            return View(await personClass.ToListAsync());
         }
 
         // POST: PersonClasses/Create
