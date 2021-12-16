@@ -4,7 +4,7 @@
 
 namespace MVC_Phone_Book.Migrations
 {
-    public partial class personAgeAdded : Migration
+    public partial class IContactAdded : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -18,21 +18,10 @@ namespace MVC_Phone_Book.Migrations
                 oldClrType: typeof(string),
                 oldType: "nvarchar(max)",
                 oldNullable: true);
-
-            migrationBuilder.AddColumn<int>(
-                name: "Age",
-                table: "Person",
-                type: "int",
-                nullable: false,
-                defaultValue: 0);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropColumn(
-                name: "Age",
-                table: "Person");
-
             migrationBuilder.AlterColumn<string>(
                 name: "FirstName",
                 table: "Person",

@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MVC_Phone_Book.Migrations
 {
     [DbContext(typeof(MVC_Phone_BookContext))]
-    [Migration("20211117031523_personAgeAdded")]
-    partial class personAgeAdded
+    [Migration("20211125051148_first1")]
+    partial class first1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -35,9 +35,6 @@ namespace MVC_Phone_Book.Migrations
                     b.Property<string>("Address")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Age")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("DateOfBirth")
                         .HasColumnType("datetime2");
 
@@ -49,6 +46,12 @@ namespace MVC_Phone_Book.Migrations
                         .HasMaxLength(60)
                         .HasColumnType("nvarchar(60)");
 
+                    b.Property<int>("ParentId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("PersonId")
+                        .HasColumnType("int");
+
                     b.Property<string>("PhoneNumber")
                         .HasMaxLength(10)
                         .HasColumnType("nvarchar(10)");
@@ -58,7 +61,21 @@ namespace MVC_Phone_Book.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("PersonId");
+
                     b.ToTable("Person");
+                });
+
+            modelBuilder.Entity("MVC_Phone_Book.Models.Person", b =>
+                {
+                    b.HasOne("MVC_Phone_Book.Models.Person", null)
+                        .WithMany("DependentChild")
+                        .HasForeignKey("PersonId");
+                });
+
+            modelBuilder.Entity("MVC_Phone_Book.Models.Person", b =>
+                {
+                    b.Navigation("DependentChild");
                 });
 #pragma warning restore 612, 618
         }

@@ -4,6 +4,7 @@ using MVC_Phone_Book.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MVC_Phone_Book.Migrations
 {
     [DbContext(typeof(MVC_Phone_BookContext))]
-    partial class MVC_Phone_BookContextModelSnapshot : ModelSnapshot
+    [Migration("20211123091824_ChildDeleted")]
+    partial class ChildDeleted
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -47,9 +49,6 @@ namespace MVC_Phone_Book.Migrations
                     b.Property<int>("ParentId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("PersonId")
-                        .HasColumnType("int");
-
                     b.Property<string>("PhoneNumber")
                         .HasMaxLength(10)
                         .HasColumnType("nvarchar(10)");
@@ -59,21 +58,7 @@ namespace MVC_Phone_Book.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("PersonId");
-
                     b.ToTable("Person");
-                });
-
-            modelBuilder.Entity("MVC_Phone_Book.Models.Person", b =>
-                {
-                    b.HasOne("MVC_Phone_Book.Models.Person", null)
-                        .WithMany("DependentChild")
-                        .HasForeignKey("PersonId");
-                });
-
-            modelBuilder.Entity("MVC_Phone_Book.Models.Person", b =>
-                {
-                    b.Navigation("DependentChild");
                 });
 #pragma warning restore 612, 618
         }

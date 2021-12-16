@@ -10,7 +10,14 @@ namespace MVC_Phone_Book.Models
     public class Person
     {
         public int Id { get; set; }
-        public int age;
+        public int ParentId { get; set; }
+        public int Age
+        {
+            get
+            {
+                return DateTime.Now.Subtract(DateOfBirth).Days / 365;
+            }
+        }
         [RegularExpression(@"^[A-Z]+[a-zA-Z\s]*$")]
         [Required]
         [StringLength(60, MinimumLength = 2)]
@@ -33,13 +40,8 @@ namespace MVC_Phone_Book.Models
         public string PhoneNumber { get; set; }
         [EmailAddress]
         public string Email { get; set; }
-        public int Age
-        {
-            get
-            {
-                return DateTime.Now.Subtract(DateOfBirth).Days / 365;
-            }
-            set { age = value; }
-        }
+
+        public List<Person> DependentChild { get; set; }
+
     }
 }

@@ -15,5 +15,6 @@ namespace MVC_Phone_Book.Data
         }
 
         public DbSet<MVC_Phone_Book.Models.Person> Person { get; set; }
+
     }
 }

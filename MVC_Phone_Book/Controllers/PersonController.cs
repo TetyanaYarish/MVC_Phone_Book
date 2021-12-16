@@ -75,11 +75,31 @@ namespace MVC_Phone_Book.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         public IActionResult Create()
         {
+          
             return View();
+        }
+        [HttpGet]
+        public IActionResult CreateChild(int parent_id)
+        {
+            Person child = new Person();
+            child.ParentId = parent_id;
+            return View(child);
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,FirstName,SecondName,DateOfBirth,Address,PhoneNumber,Email")] Person personClass)
+        public async Task<IActionResult> CreateChild([Bind("Id, ParentId, FirstName,SecondName,DateOfBirth,Address,PhoneNumber,Email")] Person personClass)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Add(personClass);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            return View(personClass);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create([Bind("Id, FirstName,SecondName,DateOfBirth,Address,PhoneNumber,Email")] Person personClass)
         {
             if (ModelState.IsValid)
             {

@@ -4,6 +4,7 @@ using MVC_Phone_Book.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MVC_Phone_Book.Migrations
 {
     [DbContext(typeof(MVC_Phone_BookContext))]
-    partial class MVC_Phone_BookContextModelSnapshot : ModelSnapshot
+    [Migration("20211123092205_AddDependChild")]
+    partial class AddDependChild
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -67,13 +69,13 @@ namespace MVC_Phone_Book.Migrations
             modelBuilder.Entity("MVC_Phone_Book.Models.Person", b =>
                 {
                     b.HasOne("MVC_Phone_Book.Models.Person", null)
-                        .WithMany("DependentChild")
+                        .WithMany("DependChild")
                         .HasForeignKey("PersonId");
                 });
 
             modelBuilder.Entity("MVC_Phone_Book.Models.Person", b =>
                 {
-                    b.Navigation("DependentChild");
+                    b.Navigation("DependChild");
                 });
 #pragma warning restore 612, 618
         }

@@ -26,21 +26,19 @@ namespace MVC_Phone_Book.Models
                         Address = "Her new home",
                         DateOfBirth = DateTime.Parse("2000-2-12"),
                         PhoneNumber = "0123456789",
-                        Email = "bob1@gmail.com",
-                        Age = 35,
+                        Email = "bob1@gmail.com"
 
                     },
                      new Person
                      {
                          FirstName = "Bob",
-                         SecondName = "Tramp",
+                         SecondName = "Trump",
                          Address = "Her new home",
                          DateOfBirth = DateTime.Parse("2000-2-12"),
                          PhoneNumber = "0123456789",
-                         Email = "bob2@gmail.com",
-                         Age = 35,
+                         Email = "bob2@gmail.com"
                      }
-                    ); ;
+                    ); 
                 context.SaveChanges();
             }
 
